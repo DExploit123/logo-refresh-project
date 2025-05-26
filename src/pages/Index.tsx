@@ -20,11 +20,15 @@ import {
 import { useNavigate } from "react-router-dom";
 import FaceIdCapture from "../components/FaceIdCapture";
 import FaceIdSuccess from "../components/FaceIdSuccess";
+import NewDeposit from "../components/NewDeposit";
+import DepositConfirmation from "../components/DepositConfirmation";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState("home");
   const [unsyncedEntries] = useState(3);
   const [faceIdEnabled, setFaceIdEnabled] = useState(false);
+  const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
+  const [depositAmount, setDepositAmount] = useState("");
   const navigate = useNavigate();
 
   const customers = [
@@ -144,7 +148,10 @@ const Index = () => {
           <div 
             key={customer.id} 
             className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
-            onClick={() => setCurrentView("customerDetails")}
+            onClick={() => {
+              setSelectedCustomer(customer);
+              setCurrentView("newDeposit");
+            }}
           >
             <div className="flex items-center gap-3">
               <Avatar className="w-12 h-12">
@@ -324,6 +331,26 @@ const Index = () => {
     </div>
   );
 
+  const renderNewDepositView = () => (
+    <NewDeposit 
+      onBack={() => setCurrentView("customers")}
+      onSubmit={(amount) => {
+        setDepositAmount(amount);
+        setCurrentView("depositConfirmation");
+      }}
+      customerName={selectedCustomer?.name || ""}
+    />
+  );
+
+  const renderDepositConfirmationView = () => (
+    <DepositConfirmation 
+      onBack={() => setCurrentView("newDeposit")}
+      onDone={() => setCurrentView("customers")}
+      amount={depositAmount}
+      customerName={selectedCustomer?.name || ""}
+    />
+  );
+
   const renderView = () => {
     switch (currentView) {
       case "customers":
@@ -338,6 +365,10 @@ const Index = () => {
         return renderFaceIdSuccessView();
       case "customerDetails":
         return renderCustomerDetailsView();
+      case "newDeposit":
+        return renderNewDepositView();
+      case "depositConfirmation":
+        return renderDepositConfirmationView();
       default:
         return renderHomeView();
     }
