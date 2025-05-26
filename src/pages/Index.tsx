@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,7 @@ import {
   Search, 
   Plus,
   ArrowLeft,
-  Sync,
+  RefreshCw,
   DollarSign,
   TrendingUp
 } from "lucide-react";
@@ -78,7 +77,7 @@ const Index = () => {
         className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
         onClick={() => setCurrentView("unsynced")}
       >
-        <Sync className="w-5 h-5 mr-2" />
+        <RefreshCw className="w-5 h-5 mr-2" />
         Sync Now
       </Button>
 
@@ -192,7 +191,7 @@ const Index = () => {
 
       {/* Sync Button */}
       <Button className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg">
-        <Sync className="w-5 h-5 mr-2" />
+        <RefreshCw className="w-5 h-5 mr-2" />
         Sync Now
       </Button>
     </div>
