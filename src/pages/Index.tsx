@@ -16,10 +16,12 @@ import {
   DollarSign,
   TrendingUp
 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState("home");
   const [unsyncedEntries] = useState(3);
+  const navigate = useNavigate();
 
   const customers = [
     { id: 125, name: "Sophia Carter", avatar: "/lovable-uploads/bcc25c9e-d6ab-43c8-8ef2-a84077c6cc5f.png" },
@@ -333,11 +335,17 @@ const Index = () => {
               <Users className="w-6 h-6" />
               <span className="text-xs font-medium">Customers</span>
             </button>
-            <button className="flex flex-col items-center gap-1 text-gray-400">
+            <button 
+              onClick={() => navigate("/transactions")}
+              className="flex flex-col items-center gap-1 text-gray-400"
+            >
               <CreditCard className="w-6 h-6" />
               <span className="text-xs font-medium">Transactions</span>
             </button>
-            <button className="flex flex-col items-center gap-1 text-gray-400">
+            <button 
+              onClick={() => navigate("/settings")}
+              className="flex flex-col items-center gap-1 text-gray-400"
+            >
               <Settings className="w-6 h-6" />
               <span className="text-xs font-medium">Settings</span>
             </button>
