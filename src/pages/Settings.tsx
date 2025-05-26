@@ -1,9 +1,12 @@
 
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Settings as SettingsIcon, ChevronRight } from "lucide-react";
+import { Settings as SettingsIcon, ChevronRight, ArrowLeft } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Settings = () => {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-md mx-auto bg-gray-50 min-h-screen">
@@ -11,10 +14,19 @@ const Settings = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => navigate("/home")}
+                className="text-eclat-navy"
+              >
+                <ArrowLeft className="w-6 h-6" />
+              </Button>
               <img 
                 src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
                 alt="EclatPay" 
-                className="w-8 h-8"
+                className="w-8 h-8 cursor-pointer"
+                onClick={() => navigate("/home")}
               />
               <h1 className="text-2xl font-bold text-eclat-navy">Settings</h1>
             </div>

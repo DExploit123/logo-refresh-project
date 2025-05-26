@@ -12,7 +12,7 @@ const LogIn = () => {
 
   const handleLogin = () => {
     // For now, just navigate to the main app
-    navigate("/");
+    navigate("/home");
   };
 
   return (
@@ -24,7 +24,7 @@ const LogIn = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              onClick={() => navigate("/signin")}
+              onClick={() => navigate("/")}
               className="text-eclat-navy"
             >
               <ArrowLeft className="w-6 h-6" />
@@ -69,7 +69,7 @@ const LogIn = () => {
               <Button 
                 variant="link" 
                 className="text-eclat-blue underline"
-                onClick={() => navigate("/signin")}
+                onClick={() => navigate("/")}
               >
                 Don't have an account? Sign up
               </Button>

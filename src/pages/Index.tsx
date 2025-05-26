@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -57,11 +58,17 @@ const Index = () => {
           <img 
             src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
             alt="EclatPay" 
-            className="w-8 h-8"
+            className="w-8 h-8 cursor-pointer"
+            onClick={() => navigate("/home")}
           />
           <h1 className="text-2xl font-bold text-eclat-navy">Home</h1>
         </div>
-        <Button variant="ghost" size="icon" className="text-eclat-navy">
+        <Button 
+          variant="ghost" 
+          size="icon" 
+          className="text-eclat-navy"
+          onClick={() => navigate("/settings")}
+        >
           <Settings className="w-6 h-6" />
         </Button>
       </div>

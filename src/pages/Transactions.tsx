@@ -3,9 +3,11 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { ArrowLeft, Settings } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Transactions = () => {
   const [currentView, setCurrentView] = useState("transactions");
+  const navigate = useNavigate();
 
   const transactionHistory = [
     { name: "Ava Thompson", type: "Deposit", amount: "+$50", avatar: "/lovable-uploads/bcc25c9e-d6ab-43c8-8ef2-a84077c6cc5f.png" },
@@ -23,14 +25,28 @@ const Transactions = () => {
           {/* Header */}
           <div className="flex items-center justify-between mb-8">
             <div className="flex items-center gap-3">
+              <Button 
+                variant="ghost" 
+                size="icon" 
+                onClick={() => navigate("/home")}
+                className="text-eclat-navy"
+              >
+                <ArrowLeft className="w-6 h-6" />
+              </Button>
               <img 
                 src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
                 alt="EclatPay" 
-                className="w-8 h-8"
+                className="w-8 h-8 cursor-pointer"
+                onClick={() => navigate("/home")}
               />
               <h1 className="text-2xl font-bold text-eclat-navy">Transactions</h1>
             </div>
-            <Button variant="ghost" size="icon" className="text-eclat-navy">
+            <Button 
+              variant="ghost" 
+              size="icon" 
+              className="text-eclat-navy"
+              onClick={() => navigate("/settings")}
+            >
               <Settings className="w-6 h-6" />
             </Button>
           </div>
