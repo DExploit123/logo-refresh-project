@@ -24,7 +24,7 @@ const FaceIdCapture = ({ onBack, onCapture }: FaceIdCaptureProps) => {
       </div>
 
       {/* Instructions */}
-      <div className="text-center space-y-4">
+      <div className="space-y-4">
         <h2 className="text-3xl font-bold text-eclat-navy">Position your face in the frame</h2>
         <p className="text-gray-600 text-lg">
           Make sure your face is clearly visible and well-lit.
