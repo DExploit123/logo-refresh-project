@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
+import { Switch } from "@/components/ui/switch";
 import { 
   Home, 
   Users, 
@@ -17,10 +18,13 @@ import {
   TrendingUp
 } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import FaceIdCapture from "../components/FaceIdCapture";
+import FaceIdSuccess from "../components/FaceIdSuccess";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState("home");
   const [unsyncedEntries] = useState(3);
+  const [faceIdEnabled, setFaceIdEnabled] = useState(false);
   const navigate = useNavigate();
 
   const customers = [
@@ -222,16 +226,40 @@ const Index = () => {
         
         <div className="flex items-center justify-between py-4">
           <span className="font-medium text-eclat-navy">Enable Face ID</span>
-          <div className="w-12 h-6 bg-gray-300 rounded-full relative cursor-pointer">
-            <div className="w-5 h-5 bg-white rounded-full absolute top-0.5 left-0.5 transition-transform"></div>
-          </div>
+          <Switch 
+            checked={faceIdEnabled} 
+            onCheckedChange={setFaceIdEnabled}
+          />
         </div>
 
-        <Button className="w-full py-4 bg-eclat-gray hover:bg-gray-300 text-eclat-navy font-semibold rounded-2xl">
+        <Button 
+          className="w-full py-4 bg-eclat-gray hover:bg-gray-300 text-eclat-navy font-semibold rounded-2xl"
+          onClick={() => {
+            if (faceIdEnabled) {
+              setCurrentView("faceIdCapture");
+            } else {
+              // Handle registration without Face ID
+              console.log("Customer registered without Face ID");
+            }
+          }}
+        >
           Register
         </Button>
       </div>
     </div>
+  );
+
+  const renderFaceIdCaptureView = () => (
+    <FaceIdCapture 
+      onBack={() => setCurrentView("newCustomer")}
+      onCapture={() => setCurrentView("faceIdSuccess")}
+    />
+  );
+
+  const renderFaceIdSuccessView = () => (
+    <FaceIdSuccess 
+      onContinue={() => setCurrentView("customers")}
+    />
   );
 
   const renderCustomerDetailsView = () => (
@@ -304,6 +332,10 @@ const Index = () => {
         return renderUnsyncedView();
       case "newCustomer":
         return renderNewCustomerView();
+      case "faceIdCapture":
+        return renderFaceIdCaptureView();
+      case "faceIdSuccess":
+        return renderFaceIdSuccessView();
       case "customerDetails":
         return renderCustomerDetailsView();
       default:
