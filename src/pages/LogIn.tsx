@@ -75,7 +75,7 @@ const LogIn = () => {
             />
 
             <Button 
-              className="w-full py-4 bg-eclat-gray dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-eclat-navy dark:text-white font-semibold rounded-2xl text-lg mt-8"
+              className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl text-lg mt-8"
               onClick={handleLogin}
             >
               Log in

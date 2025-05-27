@@ -30,6 +30,11 @@ const Index = () => {
   const [faceIdEnabled, setFaceIdEnabled] = useState(false);
   const [selectedCustomer, setSelectedCustomer] = useState<any>(null);
   const [depositAmount, setDepositAmount] = useState("");
+  const [newCustomerForm, setNewCustomerForm] = useState({
+    fullName: "",
+    phoneNumber: "",
+    address: ""
+  });
   const navigate = useNavigate();
 
   const customers = [
@@ -49,6 +54,28 @@ const Index = () => {
     { type: "Savings Withdrawal", time: "11:45 AM" },
     { type: "Savings Deposit", time: "02:15 PM" }
   ];
+
+  const handleNewCustomerRegistration = () => {
+    // Validate all fields are filled
+    if (!newCustomerForm.fullName.trim() || !newCustomerForm.phoneNumber.trim() || !newCustomerForm.address.trim()) {
+      alert("Please fill in all fields before registering.");
+      return;
+    }
+    
+    if (!faceIdEnabled) {
+      alert("Face ID must be enabled to register a new customer.");
+      return;
+    }
+    
+    setCurrentView("faceIdCapture");
+  };
+
+  const handleFormChange = (field: string, value: string) => {
+    setNewCustomerForm(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
 
   const renderHomeView = () => (
     <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
@@ -221,59 +248,78 @@ const Index = () => {
   );
 
   const renderNewCustomerView = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4">
-        <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setCurrentView("customers")}
-          className="text-eclat-navy dark:text-eclat-orange"
-        >
-          <ArrowLeft className="w-6 h-6" />
-        </Button>
-        <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">New Customer</h1>
-      </div>
-
-      {/* Form */}
-      <div className="space-y-4">
-        <Input placeholder="Full Name" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
-        <Input placeholder="Phone Number" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
-        <Input placeholder="Address" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
-        
-        <div className="flex items-center justify-between py-4 px-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-600">
-          <span className="font-medium text-eclat-navy dark:text-eclat-orange">Enable Face ID (Required)</span>
-          <Switch 
-            checked={faceIdEnabled} 
-            onCheckedChange={setFaceIdEnabled}
-          />
+    <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
+      <div className="space-y-6 pb-6">
+        {/* Header */}
+        <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setCurrentView("customers")}
+            className="text-eclat-navy dark:text-eclat-orange"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </Button>
+          <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">New Customer</h1>
         </div>
 
-        {!faceIdEnabled && (
-          <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl">
-            <p className="text-sm text-orange-800 dark:text-orange-300">
-              Face ID must be enabled to register a new customer for security purposes.
-            </p>
+        {/* Form */}
+        <div className="space-y-4">
+          <Input 
+            placeholder="Full Name" 
+            className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" 
+            value={newCustomerForm.fullName}
+            onChange={(e) => handleFormChange("fullName", e.target.value)}
+            required
+          />
+          <Input 
+            placeholder="Phone Number" 
+            className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue"
+            value={newCustomerForm.phoneNumber}
+            onChange={(e) => handleFormChange("phoneNumber", e.target.value)}
+            required
+          />
+          <Input 
+            placeholder="Address" 
+            className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue"
+            value={newCustomerForm.address}
+            onChange={(e) => handleFormChange("address", e.target.value)}
+            required
+          />
+          
+          <div className="flex items-center justify-between py-4 px-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-600">
+            <span className="font-medium text-eclat-navy dark:text-eclat-orange">Enable Face ID (Required)</span>
+            <Switch 
+              checked={faceIdEnabled} 
+              onCheckedChange={setFaceIdEnabled}
+            />
           </div>
-        )}
 
-        <Button 
-          className={`w-full py-4 font-semibold rounded-2xl ${
-            faceIdEnabled 
-              ? "bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white" 
-              : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
-          }`}
-          disabled={!faceIdEnabled}
-          onClick={() => {
-            if (faceIdEnabled) {
-              setCurrentView("faceIdCapture");
-            }
-          }}
-        >
-          Register
-        </Button>
+          {(!faceIdEnabled || !newCustomerForm.fullName.trim() || !newCustomerForm.phoneNumber.trim() || !newCustomerForm.address.trim()) && (
+            <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl">
+              <p className="text-sm text-orange-800 dark:text-orange-300">
+                {!faceIdEnabled 
+                  ? "Face ID must be enabled to register a new customer for security purposes."
+                  : "Please fill in all fields before registering."
+                }
+              </p>
+            </div>
+          )}
+
+          <Button 
+            className={`w-full py-4 font-semibold rounded-2xl ${
+              faceIdEnabled && newCustomerForm.fullName.trim() && newCustomerForm.phoneNumber.trim() && newCustomerForm.address.trim()
+                ? "bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white" 
+                : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+            }`}
+            disabled={!faceIdEnabled || !newCustomerForm.fullName.trim() || !newCustomerForm.phoneNumber.trim() || !newCustomerForm.address.trim()}
+            onClick={handleNewCustomerRegistration}
+          >
+            Register
+          </Button>
+        </div>
       </div>
-    </div>
+    </ScrollArea>
   );
 
   const renderFaceIdCaptureView = () => (
