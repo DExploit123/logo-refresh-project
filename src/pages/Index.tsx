@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -6,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Badge } from "@/components/ui/badge";
 import { Switch } from "@/components/ui/switch";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { 
   Home, 
   Users, 
@@ -51,131 +51,135 @@ const Index = () => {
   ];
 
   const renderHomeView = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-3">
-          <img 
-            src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
-            alt="EclatPay" 
-            className="w-8 h-8 cursor-pointer"
-            onClick={() => navigate("/home")}
-          />
-          <h1 className="text-2xl font-bold text-eclat-navy">Home</h1>
+    <ScrollArea className="h-[calc(100vh-8rem)]">
+      <div className="space-y-6 pb-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center justify-center flex-1">
+            <img 
+              src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
+              alt="EclatPay" 
+              className="w-10 h-10 cursor-pointer font-bold"
+              onClick={() => navigate("/home")}
+              style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(77%) saturate(1075%) hue-rotate(200deg) brightness(96%) contrast(95%)' }}
+            />
+          </div>
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            className="text-eclat-navy"
+            onClick={() => navigate("/settings")}
+          >
+            <Settings className="w-6 h-6" />
+          </Button>
         </div>
+
+        {/* Stats Cards */}
+        <div className="grid grid-cols-2 gap-4">
+          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
+            <div className="space-y-2">
+              <p className="text-sm text-gray-600 font-medium">Total Customers</p>
+              <p className="text-3xl font-bold text-eclat-navy">125</p>
+            </div>
+          </Card>
+          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
+            <div className="space-y-2">
+              <p className="text-sm text-gray-600 font-medium">Unsynced Entries</p>
+              <p className="text-3xl font-bold text-eclat-navy">{unsyncedEntries}</p>
+            </div>
+          </Card>
+        </div>
+
+        {/* Sync Button */}
         <Button 
-          variant="ghost" 
-          size="icon" 
-          className="text-eclat-navy"
-          onClick={() => navigate("/settings")}
+          className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
+          onClick={() => setCurrentView("unsynced")}
         >
-          <Settings className="w-6 h-6" />
+          <RefreshCw className="w-5 h-5 mr-2" />
+          Sync Now
         </Button>
-      </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-2 gap-4">
-        <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
-          <div className="space-y-2">
-            <p className="text-sm text-gray-600 font-medium">Total Customers</p>
-            <p className="text-3xl font-bold text-eclat-navy">125</p>
+        {/* Recent Transactions */}
+        <div className="space-y-4">
+          <h2 className="text-xl font-bold text-eclat-navy">Recent Transactions</h2>
+          <div className="space-y-3">
+            {recentTransactions.map((transaction, index) => (
+              <div key={index} className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+                <div className="flex items-center gap-3">
+                  <Avatar className="w-12 h-12">
+                    <AvatarImage src={transaction.avatar} />
+                    <AvatarFallback className="bg-eclat-blue text-white">
+                      {transaction.name.split(' ').map(n => n[0]).join('')}
+                    </AvatarFallback>
+                  </Avatar>
+                  <div>
+                    <p className="font-semibold text-eclat-navy">{transaction.name}</p>
+                    <p className="text-sm text-gray-500">{transaction.type}</p>
+                  </div>
+                </div>
+                <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-500'}`}>
+                  {transaction.amount}
+                </p>
+              </div>
+            ))}
           </div>
-        </Card>
-        <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
-          <div className="space-y-2">
-            <p className="text-sm text-gray-600 font-medium">Unsynced Entries</p>
-            <p className="text-3xl font-bold text-eclat-navy">{unsyncedEntries}</p>
-          </div>
-        </Card>
+        </div>
       </div>
+    </ScrollArea>
+  );
 
-      {/* Sync Button */}
-      <Button 
-        className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
-        onClick={() => setCurrentView("unsynced")}
-      >
-        <RefreshCw className="w-5 h-5 mr-2" />
-        Sync Now
-      </Button>
+  const renderCustomersView = () => (
+    <ScrollArea className="h-[calc(100vh-8rem)]">
+      <div className="space-y-6 pb-6">
+        {/* Header */}
+        <div className="flex items-center justify-between">
+          <h1 className="text-2xl font-bold text-eclat-navy">Customers</h1>
+          <Button 
+            size="icon" 
+            className="bg-eclat-blue hover:bg-blue-600 text-white rounded-full"
+            onClick={() => setCurrentView("newCustomer")}
+          >
+            <Plus className="w-6 h-6" />
+          </Button>
+        </div>
 
-      {/* Recent Transactions */}
-      <div className="space-y-4">
-        <h2 className="text-xl font-bold text-eclat-navy">Recent Transactions</h2>
+        {/* Search */}
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Input 
+            placeholder="Search customers" 
+            className="pl-10 py-3 bg-eclat-gray border-0 rounded-xl"
+          />
+        </div>
+
+        {/* Customer List */}
         <div className="space-y-3">
-          {recentTransactions.map((transaction, index) => (
-            <div key={index} className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+          {customers.map((customer) => (
+            <div 
+              key={customer.id} 
+              className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
+              onClick={() => {
+                setSelectedCustomer(customer);
+                setCurrentView("newDeposit");
+              }}
+            >
               <div className="flex items-center gap-3">
                 <Avatar className="w-12 h-12">
-                  <AvatarImage src={transaction.avatar} />
-                  <AvatarFallback className="bg-eclat-blue text-white">
-                    {transaction.name.split(' ').map(n => n[0]).join('')}
+                  <AvatarImage src={customer.avatar} />
+                  <AvatarFallback className="bg-eclat-orange text-white">
+                    {customer.name.split(' ').map(n => n[0]).join('')}
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-eclat-navy">{transaction.name}</p>
-                  <p className="text-sm text-gray-500">{transaction.type}</p>
+                  <p className="font-semibold text-eclat-navy">{customer.name}</p>
+                  <p className="text-sm text-eclat-blue">ID: {customer.id}</p>
                 </div>
               </div>
-              <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-500'}`}>
-                {transaction.amount}
-              </p>
             </div>
           ))}
         </div>
       </div>
-    </div>
-  );
-
-  const renderCustomersView = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold text-eclat-navy">Customers</h1>
-        <Button 
-          size="icon" 
-          className="bg-eclat-blue hover:bg-blue-600 text-white rounded-full"
-          onClick={() => setCurrentView("newCustomer")}
-        >
-          <Plus className="w-6 h-6" />
-        </Button>
-      </div>
-
-      {/* Search */}
-      <div className="relative">
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
-        <Input 
-          placeholder="Search customers" 
-          className="pl-10 py-3 bg-eclat-gray border-0 rounded-xl"
-        />
-      </div>
-
-      {/* Customer List */}
-      <div className="space-y-3">
-        {customers.map((customer) => (
-          <div 
-            key={customer.id} 
-            className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
-            onClick={() => {
-              setSelectedCustomer(customer);
-              setCurrentView("newDeposit");
-            }}
-          >
-            <div className="flex items-center gap-3">
-              <Avatar className="w-12 h-12">
-                <AvatarImage src={customer.avatar} />
-                <AvatarFallback className="bg-eclat-orange text-white">
-                  {customer.name.split(' ').map(n => n[0]).join('')}
-                </AvatarFallback>
-              </Avatar>
-              <div>
-                <p className="font-semibold text-eclat-navy">{customer.name}</p>
-                <p className="text-sm text-eclat-blue">ID: {customer.id}</p>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
+    </ScrollArea>
   );
 
   const renderUnsyncedView = () => (
@@ -382,39 +386,39 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
-      <div className="max-w-md mx-auto bg-gray-50 min-h-screen">
+    <div className="min-h-screen bg-gray-50 dark:bg-gray-900">
+      <div className="max-w-md mx-auto bg-gray-50 dark:bg-gray-900 min-h-screen">
         <div className="p-6">
           {renderView()}
         </div>
 
         {/* Bottom Navigation */}
-        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white border-t border-gray-200 px-6 py-4">
+        <div className="fixed bottom-0 left-1/2 transform -translate-x-1/2 w-full max-w-md bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 px-6 py-4">
           <div className="flex justify-around items-center">
             <button 
               onClick={() => setCurrentView("home")}
-              className={`flex flex-col items-center gap-1 ${currentView === "home" ? "text-eclat-blue" : "text-gray-400"}`}
+              className={`flex flex-col items-center gap-1 ${currentView === "home" ? "text-eclat-blue" : "text-gray-400 dark:text-gray-500"}`}
             >
               <Home className="w-6 h-6" />
               <span className="text-xs font-medium">Home</span>
             </button>
             <button 
               onClick={() => setCurrentView("customers")}
-              className={`flex flex-col items-center gap-1 ${currentView === "customers" ? "text-eclat-blue" : "text-gray-400"}`}
+              className={`flex flex-col items-center gap-1 ${currentView === "customers" ? "text-eclat-blue" : "text-gray-400 dark:text-gray-500"}`}
             >
               <Users className="w-6 h-6" />
               <span className="text-xs font-medium">Customers</span>
             </button>
             <button 
               onClick={() => navigate("/transactions")}
-              className="flex flex-col items-center gap-1 text-gray-400"
+              className="flex flex-col items-center gap-1 text-gray-400 dark:text-gray-500"
             >
               <CreditCard className="w-6 h-6" />
               <span className="text-xs font-medium">Transactions</span>
             </button>
             <button 
               onClick={() => navigate("/settings")}
-              className="flex flex-col items-center gap-1 text-gray-400"
+              className="flex flex-col items-center gap-1 text-gray-400 dark:text-gray-500"
             >
               <Settings className="w-6 h-6" />
               <span className="text-xs font-medium">Settings</span>
