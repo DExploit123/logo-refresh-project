@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -28,7 +29,7 @@ const Transactions = () => {
               variant="ghost" 
               size="icon" 
               onClick={() => navigate("/home")}
-              className="text-eclat-navy dark:text-gray-300"
+              className="text-eclat-navy dark:text-eclat-orange"
             >
               <ArrowLeft className="w-6 h-6" />
             </Button>
@@ -43,7 +44,7 @@ const Transactions = () => {
             <Button 
               variant="ghost" 
               size="icon" 
-              className="text-eclat-navy dark:text-gray-300"
+              className="text-eclat-navy dark:text-eclat-orange"
               onClick={() => navigate("/settings")}
             >
               <Settings className="w-6 h-6" />
@@ -51,13 +52,13 @@ const Transactions = () => {
           </div>
 
           {/* Transaction History Section */}
-          <ScrollArea className="h-[calc(100vh-10rem)]">
+          <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
             <div className="space-y-6 pb-6">
-              <h2 className="text-xl font-bold text-eclat-navy dark:text-gray-100">Transaction History</h2>
+              <h2 className="text-xl font-bold text-eclat-navy dark:text-eclat-orange">Transaction History</h2>
               
               <div className="space-y-3">
                 {transactionHistory.map((transaction, index) => (
-                  <div key={index} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700">
+                  <div key={index} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
                     <div className="flex items-center gap-3">
                       <Avatar className="w-12 h-12">
                         <AvatarImage src={transaction.avatar} />
@@ -66,11 +67,11 @@ const Transactions = () => {
                         </AvatarFallback>
                       </Avatar>
                       <div>
-                        <p className="font-semibold text-eclat-navy dark:text-gray-100">{transaction.name}</p>
-                        <p className="text-sm text-eclat-blue dark:text-gray-400">{transaction.type}</p>
+                        <p className="font-semibold text-eclat-navy dark:text-white">{transaction.name}</p>
+                        <p className="text-sm text-eclat-blue dark:text-eclat-blue">{transaction.type}</p>
                       </div>
                     </div>
-                    <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-500'}`}>
+                    <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
                       {transaction.amount}
                     </p>
                   </div>

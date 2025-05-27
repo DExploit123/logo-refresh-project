@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -52,7 +51,7 @@ const Index = () => {
   ];
 
   const renderHomeView = () => (
-    <ScrollArea className="h-[calc(100vh-8rem)]">
+    <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
       <div className="space-y-6 pb-6">
         {/* Header */}
         <div className="flex items-center justify-between">
@@ -67,7 +66,7 @@ const Index = () => {
           <Button 
             variant="ghost" 
             size="icon" 
-            className="text-eclat-navy"
+            className="text-eclat-navy dark:text-eclat-orange"
             onClick={() => navigate("/settings")}
           >
             <Settings className="w-6 h-6" />
@@ -76,16 +75,16 @@ const Index = () => {
 
         {/* Stats Cards */}
         <div className="grid grid-cols-2 gap-4">
-          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
+          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white dark:from-gray-800 dark:to-gray-700 border-0 shadow-sm">
             <div className="space-y-2">
-              <p className="text-sm text-gray-600 font-medium">Total Customers</p>
-              <p className="text-3xl font-bold text-eclat-navy">125</p>
+              <p className="text-sm text-gray-600 dark:text-eclat-blue font-medium">Total Customers</p>
+              <p className="text-3xl font-bold text-eclat-navy dark:text-eclat-orange">125</p>
             </div>
           </Card>
-          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white border-0 shadow-sm">
+          <Card className="p-6 bg-gradient-to-br from-eclat-gray to-white dark:from-gray-800 dark:to-gray-700 border-0 shadow-sm">
             <div className="space-y-2">
-              <p className="text-sm text-gray-600 font-medium">Unsynced Entries</p>
-              <p className="text-3xl font-bold text-eclat-navy">{unsyncedEntries}</p>
+              <p className="text-sm text-gray-600 dark:text-eclat-blue font-medium">Unsynced Entries</p>
+              <p className="text-3xl font-bold text-eclat-navy dark:text-eclat-orange">{unsyncedEntries}</p>
             </div>
           </Card>
         </div>
@@ -101,10 +100,10 @@ const Index = () => {
 
         {/* Recent Transactions */}
         <div className="space-y-4">
-          <h2 className="text-xl font-bold text-eclat-navy">Recent Transactions</h2>
+          <h2 className="text-xl font-bold text-eclat-navy dark:text-eclat-orange">Recent Transactions</h2>
           <div className="space-y-3">
             {recentTransactions.map((transaction, index) => (
-              <div key={index} className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100">
+              <div key={index} className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
                 <div className="flex items-center gap-3">
                   <Avatar className="w-12 h-12">
                     <AvatarImage src={transaction.avatar} />
@@ -113,11 +112,11 @@ const Index = () => {
                     </AvatarFallback>
                   </Avatar>
                   <div>
-                    <p className="font-semibold text-eclat-navy">{transaction.name}</p>
-                    <p className="text-sm text-gray-500">{transaction.type}</p>
+                    <p className="font-semibold text-eclat-navy dark:text-white">{transaction.name}</p>
+                    <p className="text-sm text-gray-500 dark:text-eclat-blue">{transaction.type}</p>
                   </div>
                 </div>
-                <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600' : 'text-red-500'}`}>
+                <p className={`font-bold ${transaction.amount.startsWith('+') ? 'text-green-600 dark:text-green-400' : 'text-red-500 dark:text-red-400'}`}>
                   {transaction.amount}
                 </p>
               </div>
@@ -129,11 +128,11 @@ const Index = () => {
   );
 
   const renderCustomersView = () => (
-    <ScrollArea className="h-[calc(100vh-8rem)]">
+    <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
       <div className="space-y-6 pb-6">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-bold text-eclat-navy">Customers</h1>
+          <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">Customers</h1>
           <Button 
             size="icon" 
             className="bg-eclat-blue hover:bg-blue-600 text-white rounded-full"
@@ -145,10 +144,10 @@ const Index = () => {
 
         {/* Search */}
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+          <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 dark:text-eclat-blue w-5 h-5" />
           <Input 
             placeholder="Search customers" 
-            className="pl-10 py-3 bg-eclat-gray border-0 rounded-xl"
+            className="pl-10 py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue"
           />
         </div>
 
@@ -157,7 +156,7 @@ const Index = () => {
           {customers.map((customer) => (
             <div 
               key={customer.id} 
-              className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
+              className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
               onClick={() => {
                 setSelectedCustomer(customer);
                 setCurrentView("customerDetails");
@@ -171,7 +170,7 @@ const Index = () => {
                   </AvatarFallback>
                 </Avatar>
                 <div>
-                  <p className="font-semibold text-eclat-navy">{customer.name}</p>
+                  <p className="font-semibold text-eclat-navy dark:text-white">{customer.name}</p>
                   <p className="text-sm text-eclat-blue">ID: {customer.id}</p>
                 </div>
               </div>
@@ -190,25 +189,25 @@ const Index = () => {
           variant="ghost" 
           size="icon" 
           onClick={() => setCurrentView("home")}
-          className="text-eclat-navy"
+          className="text-eclat-navy dark:text-eclat-orange"
         >
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <h1 className="text-2xl font-bold text-eclat-navy">Unsynced Entries</h1>
+        <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">Unsynced Entries</h1>
       </div>
 
       {/* Unsynced Items */}
       <div className="space-y-3">
         {unsyncedData.map((item, index) => (
-          <div key={index} className="flex items-center gap-4 p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div className="w-12 h-12 bg-eclat-gray rounded-xl flex items-center justify-center">
-              <DollarSign className="w-6 h-6 text-eclat-navy" />
+          <div key={index} className="flex items-center gap-4 p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
+            <div className="w-12 h-12 bg-eclat-gray dark:bg-gray-700 rounded-xl flex items-center justify-center">
+              <DollarSign className="w-6 h-6 text-eclat-navy dark:text-eclat-orange" />
             </div>
             <div className="flex-1">
-              <p className="font-semibold text-eclat-navy">{item.type}</p>
+              <p className="font-semibold text-eclat-navy dark:text-white">{item.type}</p>
               <p className="text-sm text-eclat-blue">{item.time}</p>
             </div>
-            <Users className="w-5 h-5 text-gray-400" />
+            <Users className="w-5 h-5 text-gray-400 dark:text-eclat-blue" />
           </div>
         ))}
       </div>
@@ -229,35 +228,45 @@ const Index = () => {
           variant="ghost" 
           size="icon" 
           onClick={() => setCurrentView("customers")}
-          className="text-eclat-navy"
+          className="text-eclat-navy dark:text-eclat-orange"
         >
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <h1 className="text-2xl font-bold text-eclat-navy">New Customer</h1>
+        <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">New Customer</h1>
       </div>
 
       {/* Form */}
       <div className="space-y-4">
-        <Input placeholder="Full Name" className="py-3 bg-eclat-gray border-0 rounded-xl" />
-        <Input placeholder="Phone Number" className="py-3 bg-eclat-gray border-0 rounded-xl" />
-        <Input placeholder="Address" className="py-3 bg-eclat-gray border-0 rounded-xl" />
+        <Input placeholder="Full Name" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
+        <Input placeholder="Phone Number" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
+        <Input placeholder="Address" className="py-3 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl dark:text-white dark:placeholder:text-eclat-blue" />
         
-        <div className="flex items-center justify-between py-4">
-          <span className="font-medium text-eclat-navy">Enable Face ID</span>
+        <div className="flex items-center justify-between py-4 px-4 bg-white dark:bg-gray-800 rounded-xl border border-gray-100 dark:border-gray-600">
+          <span className="font-medium text-eclat-navy dark:text-eclat-orange">Enable Face ID (Required)</span>
           <Switch 
             checked={faceIdEnabled} 
             onCheckedChange={setFaceIdEnabled}
           />
         </div>
 
+        {!faceIdEnabled && (
+          <div className="p-4 bg-orange-50 dark:bg-orange-900/20 border border-orange-200 dark:border-orange-800 rounded-xl">
+            <p className="text-sm text-orange-800 dark:text-orange-300">
+              Face ID must be enabled to register a new customer for security purposes.
+            </p>
+          </div>
+        )}
+
         <Button 
-          className="w-full py-4 bg-eclat-gray hover:bg-gray-300 text-eclat-navy font-semibold rounded-2xl"
+          className={`w-full py-4 font-semibold rounded-2xl ${
+            faceIdEnabled 
+              ? "bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white" 
+              : "bg-gray-300 dark:bg-gray-700 text-gray-500 dark:text-gray-400 cursor-not-allowed"
+          }`}
+          disabled={!faceIdEnabled}
           onClick={() => {
             if (faceIdEnabled) {
               setCurrentView("faceIdCapture");
-            } else {
-              // Handle registration without Face ID
-              console.log("Customer registered without Face ID");
             }
           }}
         >
@@ -281,70 +290,72 @@ const Index = () => {
   );
 
   const renderCustomerDetailsView = () => (
-    <div className="space-y-6">
-      {/* Header */}
-      <div className="flex items-center gap-4">
+    <ScrollArea className="h-[calc(100vh-10rem)] pr-4">
+      <div className="space-y-6 pb-6">
+        {/* Header */}
+        <div className="flex items-center gap-4">
+          <Button 
+            variant="ghost" 
+            size="icon" 
+            onClick={() => setCurrentView("customers")}
+            className="text-eclat-navy dark:text-eclat-orange"
+          >
+            <ArrowLeft className="w-6 h-6" />
+          </Button>
+          <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">Customer Details</h1>
+        </div>
+
+        {/* Customer Info */}
+        <div className="text-center space-y-4">
+          <Avatar className="w-32 h-32 mx-auto">
+            <AvatarImage src={selectedCustomer?.avatar} />
+            <AvatarFallback className="bg-orange-200 text-eclat-navy text-2xl">
+              {selectedCustomer?.name.split(' ').map((n: string) => n[0]).join('')}
+            </AvatarFallback>
+          </Avatar>
+          <div>
+            <h2 className="text-2xl font-bold text-eclat-navy dark:text-white">{selectedCustomer?.name}</h2>
+            <p className="text-eclat-blue">Customer ID: {selectedCustomer?.id}</p>
+          </div>
+        </div>
+
+        {/* Savings History */}
+        <div className="space-y-4">
+          <h3 className="text-xl font-bold text-eclat-navy dark:text-eclat-orange">Savings History</h3>
+          <div className="space-y-3">
+            <div className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
+              <div>
+                <p className="font-semibold text-eclat-navy dark:text-white">100</p>
+                <p className="text-sm text-eclat-blue">Deposit</p>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-eclat-blue">2024-01-15</p>
+            </div>
+            <div className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
+              <div>
+                <p className="font-semibold text-eclat-navy dark:text-white">50</p>
+                <p className="text-sm text-eclat-blue">Withdrawal</p>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-eclat-blue">2024-02-20</p>
+            </div>
+            <div className="flex justify-between items-center p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
+              <div>
+                <p className="font-semibold text-eclat-navy dark:text-white">75</p>
+                <p className="text-sm text-eclat-blue">Deposit</p>
+              </div>
+              <p className="text-sm text-gray-500 dark:text-eclat-blue">2024-03-10</p>
+            </div>
+          </div>
+        </div>
+
+        {/* New Entry Button */}
         <Button 
-          variant="ghost" 
-          size="icon" 
-          onClick={() => setCurrentView("customers")}
-          className="text-eclat-navy"
+          className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
+          onClick={() => setCurrentView("newDeposit")}
         >
-          <ArrowLeft className="w-6 h-6" />
+          New Entry
         </Button>
-        <h1 className="text-2xl font-bold text-eclat-navy">Customer Details</h1>
       </div>
-
-      {/* Customer Info */}
-      <div className="text-center space-y-4">
-        <Avatar className="w-32 h-32 mx-auto">
-          <AvatarImage src={selectedCustomer?.avatar} />
-          <AvatarFallback className="bg-orange-200 text-eclat-navy text-2xl">
-            {selectedCustomer?.name.split(' ').map((n: string) => n[0]).join('')}
-          </AvatarFallback>
-        </Avatar>
-        <div>
-          <h2 className="text-2xl font-bold text-eclat-navy">{selectedCustomer?.name}</h2>
-          <p className="text-eclat-blue">Customer ID: {selectedCustomer?.id}</p>
-        </div>
-      </div>
-
-      {/* Savings History */}
-      <div className="space-y-4">
-        <h3 className="text-xl font-bold text-eclat-navy">Savings History</h3>
-        <div className="space-y-3">
-          <div className="flex justify-between items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div>
-              <p className="font-semibold text-eclat-navy">100</p>
-              <p className="text-sm text-eclat-blue">Deposit</p>
-            </div>
-            <p className="text-sm text-gray-500">2024-01-15</p>
-          </div>
-          <div className="flex justify-between items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div>
-              <p className="font-semibold text-eclat-navy">50</p>
-              <p className="text-sm text-eclat-blue">Withdrawal</p>
-            </div>
-            <p className="text-sm text-gray-500">2024-02-20</p>
-          </div>
-          <div className="flex justify-between items-center p-4 bg-white rounded-xl shadow-sm border border-gray-100">
-            <div>
-              <p className="font-semibold text-eclat-navy">75</p>
-              <p className="text-sm text-eclat-blue">Deposit</p>
-            </div>
-            <p className="text-sm text-gray-500">2024-03-10</p>
-          </div>
-        </div>
-      </div>
-
-      {/* New Entry Button */}
-      <Button 
-        className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
-        onClick={() => setCurrentView("newDeposit")}
-      >
-        New Entry
-      </Button>
-    </div>
+    </ScrollArea>
   );
 
   const renderNewDepositView = () => (

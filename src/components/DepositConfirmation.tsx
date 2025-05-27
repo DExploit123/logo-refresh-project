@@ -34,52 +34,52 @@ const DepositConfirmation = ({ onBack, onDone, amount, customerName }: DepositCo
           variant="ghost" 
           size="icon" 
           onClick={onBack}
-          className="text-eclat-navy"
+          className="text-eclat-navy dark:text-eclat-orange"
         >
           <ArrowLeft className="w-6 h-6" />
         </Button>
-        <h1 className="text-2xl font-bold text-eclat-navy">Deposit Confirmation</h1>
+        <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">Deposit Confirmation</h1>
       </div>
 
       {/* Success Message */}
       <div className="text-center space-y-4">
-        <h2 className="text-3xl font-bold text-eclat-navy">Deposit Successful</h2>
+        <h2 className="text-3xl font-bold text-eclat-navy dark:text-white">Deposit Successful</h2>
       </div>
 
       {/* Amount Display - Prominent */}
       <div className="flex justify-center my-8">
-        <div className="w-80 h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-3xl flex flex-col items-center justify-center">
-          <p className="text-lg text-green-800 font-medium mb-2">Amount Saved</p>
-          <p className="text-6xl font-bold text-green-800">${amount}</p>
-          <p className="text-lg text-green-700 mt-2">Successfully deposited</p>
+        <div className="w-80 h-48 bg-gradient-to-br from-green-100 to-green-200 dark:from-green-800 dark:to-green-700 rounded-3xl flex flex-col items-center justify-center">
+          <p className="text-lg text-green-800 dark:text-green-200 font-medium mb-2">Amount Saved</p>
+          <p className="text-6xl font-bold text-green-800 dark:text-green-100">${amount}</p>
+          <p className="text-lg text-green-700 dark:text-green-300 mt-2">Successfully deposited</p>
         </div>
       </div>
 
       {/* Transaction Details */}
       <div className="space-y-4">
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Transaction ID</p>
-          <p className="text-lg font-bold text-eclat-navy">{transactionId}</p>
+          <p className="text-lg text-eclat-navy dark:text-eclat-blue">Transaction ID</p>
+          <p className="text-lg font-bold text-eclat-navy dark:text-white">{transactionId}</p>
         </div>
         
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Customer</p>
-          <p className="text-lg font-bold text-eclat-navy">{customerName}</p>
+          <p className="text-lg text-eclat-navy dark:text-eclat-blue">Customer</p>
+          <p className="text-lg font-bold text-eclat-navy dark:text-white">{customerName}</p>
         </div>
         
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Date</p>
-          <p className="text-lg font-bold text-eclat-navy">{date}</p>
+          <p className="text-lg text-eclat-navy dark:text-eclat-blue">Date</p>
+          <p className="text-lg font-bold text-eclat-navy dark:text-white">{date}</p>
         </div>
         
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Time</p>
-          <p className="text-lg font-bold text-eclat-navy">{time}</p>
+          <p className="text-lg text-eclat-navy dark:text-eclat-blue">Time</p>
+          <p className="text-lg font-bold text-eclat-navy dark:text-white">{time}</p>
         </div>
         
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Agent</p>
-          <p className="text-lg font-bold text-eclat-navy">Agent Alex</p>
+          <p className="text-lg text-eclat-navy dark:text-eclat-blue">Agent</p>
+          <p className="text-lg font-bold text-eclat-navy dark:text-white">Agent Alex</p>
         </div>
       </div>
 

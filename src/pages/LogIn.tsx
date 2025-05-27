@@ -31,11 +31,11 @@ const LogIn = () => {
               variant="ghost" 
               size="icon" 
               onClick={() => navigate("/")}
-              className="text-eclat-navy dark:text-gray-300"
+              className="text-eclat-navy dark:text-eclat-orange"
             >
               <ArrowLeft className="w-6 h-6" />
             </Button>
-            <h1 className="text-2xl font-bold text-eclat-navy dark:text-gray-100">Log in</h1>
+            <h1 className="text-2xl font-bold text-eclat-navy dark:text-eclat-orange">Log in</h1>
           </div>
 
           {/* Logo */}
@@ -49,8 +49,8 @@ const LogIn = () => {
 
           {/* Welcome Section */}
           <div className="space-y-6 mb-8">
-            <h2 className="text-3xl font-bold text-eclat-navy dark:text-gray-100">Welcome back</h2>
-            <p className="text-gray-600 dark:text-gray-400 text-lg">
+            <h2 className="text-3xl font-bold text-eclat-navy dark:text-white">Welcome back</h2>
+            <p className="text-gray-600 dark:text-eclat-blue text-lg">
               Enter your username and password to log in to your account.
             </p>
           </div>
@@ -59,7 +59,7 @@ const LogIn = () => {
           <div className="space-y-6">
             <Input 
               placeholder="Username" 
-              className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:text-gray-100"
+              className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-eclat-blue dark:text-white"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               required
@@ -68,14 +68,14 @@ const LogIn = () => {
             <Input 
               type="password"
               placeholder="Password" 
-              className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:text-gray-100"
+              className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-eclat-blue dark:text-white"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
 
             <Button 
-              className="w-full py-4 bg-eclat-gray dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-eclat-navy dark:text-gray-100 font-semibold rounded-2xl text-lg mt-8"
+              className="w-full py-4 bg-eclat-gray dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600 text-eclat-navy dark:text-white font-semibold rounded-2xl text-lg mt-8"
               onClick={handleLogin}
             >
               Log in
@@ -85,7 +85,7 @@ const LogIn = () => {
             <div className="text-center mt-8">
               <Button 
                 variant="link" 
-                className="text-eclat-blue dark:text-blue-400 underline"
+                className="text-eclat-blue underline"
                 onClick={() => navigate("/")}
               >
                 Don't have an account? Sign up
