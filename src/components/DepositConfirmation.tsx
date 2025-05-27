@@ -1,6 +1,6 @@
 
 import { Button } from "@/components/ui/button";
-import { Check, ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 
 interface DepositConfirmationProps {
   onBack: () => void;
@@ -46,12 +46,12 @@ const DepositConfirmation = ({ onBack, onDone, amount, customerName }: DepositCo
         <h2 className="text-3xl font-bold text-eclat-navy">Deposit Successful</h2>
       </div>
 
-      {/* Success Icon */}
+      {/* Amount Display - Prominent */}
       <div className="flex justify-center my-8">
-        <div className="w-80 h-48 bg-gradient-to-br from-orange-200 to-orange-300 rounded-3xl flex items-center justify-center">
-          <div className="w-32 h-32 bg-white rounded-2xl flex items-center justify-center shadow-lg">
-            <Check className="w-16 h-16 text-green-600" strokeWidth={3} />
-          </div>
+        <div className="w-80 h-48 bg-gradient-to-br from-green-100 to-green-200 rounded-3xl flex flex-col items-center justify-center">
+          <p className="text-lg text-green-800 font-medium mb-2">Amount Saved</p>
+          <p className="text-6xl font-bold text-green-800">${amount}</p>
+          <p className="text-lg text-green-700 mt-2">Successfully deposited</p>
         </div>
       </div>
 
@@ -63,8 +63,8 @@ const DepositConfirmation = ({ onBack, onDone, amount, customerName }: DepositCo
         </div>
         
         <div className="flex justify-between items-center">
-          <p className="text-lg text-eclat-navy">Amount</p>
-          <p className="text-lg font-bold text-eclat-navy">${amount}</p>
+          <p className="text-lg text-eclat-navy">Customer</p>
+          <p className="text-lg font-bold text-eclat-navy">{customerName}</p>
         </div>
         
         <div className="flex justify-between items-center">

@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -35,11 +34,10 @@ const Transactions = () => {
             </Button>
             <div className="flex items-center justify-center flex-1">
               <img 
-                src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
+                src="/lovable-uploads/9ebaef5e-903a-4293-9279-88291c159f57.png" 
                 alt="EclatPay" 
-                className="w-10 h-10 cursor-pointer"
+                className="h-12 cursor-pointer"
                 onClick={() => navigate("/home")}
-                style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(77%) saturate(1075%) hue-rotate(200deg) brightness(96%) contrast(95%)' }}
               />
             </div>
             <Button 

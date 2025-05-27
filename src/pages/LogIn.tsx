@@ -11,6 +11,12 @@ const LogIn = () => {
   const [password, setPassword] = useState("");
 
   const handleLogin = () => {
+    // Check if fields are empty
+    if (!username.trim() || !password.trim()) {
+      alert("Please fill in both username and password fields.");
+      return;
+    }
+    
     // For now, just navigate to the main app
     navigate("/home");
   };
@@ -32,6 +38,15 @@ const LogIn = () => {
             <h1 className="text-2xl font-bold text-eclat-navy dark:text-gray-100">Log in</h1>
           </div>
 
+          {/* Logo */}
+          <div className="flex justify-center mb-8">
+            <img 
+              src="/lovable-uploads/9ebaef5e-903a-4293-9279-88291c159f57.png" 
+              alt="EclatPay" 
+              className="h-16"
+            />
+          </div>
+
           {/* Welcome Section */}
           <div className="space-y-6 mb-8">
             <h2 className="text-3xl font-bold text-eclat-navy dark:text-gray-100">Welcome back</h2>
@@ -47,6 +62,7 @@ const LogIn = () => {
               className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:text-gray-100"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              required
             />
             
             <Input 
@@ -55,6 +71,7 @@ const LogIn = () => {
               className="py-4 bg-eclat-gray dark:bg-gray-800 border-0 rounded-xl text-lg placeholder:text-gray-500 dark:placeholder:text-gray-400 dark:text-gray-100"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              required
             />
 
             <Button 

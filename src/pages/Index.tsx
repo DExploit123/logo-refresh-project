@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
@@ -57,11 +58,10 @@ const Index = () => {
         <div className="flex items-center justify-between">
           <div className="flex items-center justify-center flex-1">
             <img 
-              src="/lovable-uploads/0775d6cd-3ea4-458f-bab9-1c51aeaf7c8e.png" 
+              src="/lovable-uploads/9ebaef5e-903a-4293-9279-88291c159f57.png" 
               alt="EclatPay" 
-              className="w-10 h-10 cursor-pointer font-bold"
+              className="h-12 cursor-pointer"
               onClick={() => navigate("/home")}
-              style={{ filter: 'brightness(0) saturate(100%) invert(12%) sepia(77%) saturate(1075%) hue-rotate(200deg) brightness(96%) contrast(95%)' }}
             />
           </div>
           <Button 
@@ -160,7 +160,7 @@ const Index = () => {
               className="flex items-center justify-between p-4 bg-white rounded-xl shadow-sm border border-gray-100 cursor-pointer hover:bg-gray-50 transition-colors"
               onClick={() => {
                 setSelectedCustomer(customer);
-                setCurrentView("newDeposit");
+                setCurrentView("customerDetails");
               }}
             >
               <div className="flex items-center gap-3">
@@ -298,12 +298,14 @@ const Index = () => {
       {/* Customer Info */}
       <div className="text-center space-y-4">
         <Avatar className="w-32 h-32 mx-auto">
-          <AvatarImage src="/lovable-uploads/bcc25c9e-d6ab-43c8-8ef2-a84077c6cc5f.png" />
-          <AvatarFallback className="bg-eclat-orange text-white text-2xl">SC</AvatarFallback>
+          <AvatarImage src={selectedCustomer?.avatar} />
+          <AvatarFallback className="bg-orange-200 text-eclat-navy text-2xl">
+            {selectedCustomer?.name.split(' ').map((n: string) => n[0]).join('')}
+          </AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="text-2xl font-bold text-eclat-navy">Sophia Carter</h2>
-          <p className="text-eclat-blue">Customer ID: 123456</p>
+          <h2 className="text-2xl font-bold text-eclat-navy">{selectedCustomer?.name}</h2>
+          <p className="text-eclat-blue">Customer ID: {selectedCustomer?.id}</p>
         </div>
       </div>
 
@@ -336,7 +338,10 @@ const Index = () => {
       </div>
 
       {/* New Entry Button */}
-      <Button className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg">
+      <Button 
+        className="w-full py-4 bg-gradient-to-r from-eclat-blue to-blue-500 hover:from-blue-600 hover:to-blue-600 text-white font-semibold rounded-2xl shadow-lg"
+        onClick={() => setCurrentView("newDeposit")}
+      >
         New Entry
       </Button>
     </div>
@@ -344,7 +349,7 @@ const Index = () => {
 
   const renderNewDepositView = () => (
     <NewDeposit 
-      onBack={() => setCurrentView("customers")}
+      onBack={() => setCurrentView("customerDetails")}
       onSubmit={(amount) => {
         setDepositAmount(amount);
         setCurrentView("depositConfirmation");
@@ -356,7 +361,7 @@ const Index = () => {
   const renderDepositConfirmationView = () => (
     <DepositConfirmation 
       onBack={() => setCurrentView("newDeposit")}
-      onDone={() => setCurrentView("customers")}
+      onDone={() => setCurrentView("customerDetails")}
       amount={depositAmount}
       customerName={selectedCustomer?.name || ""}
     />
