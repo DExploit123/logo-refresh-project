@@ -78,7 +78,10 @@ const Settings = () => {
               
               <div className="space-y-4">
                 {/* Agent Profile */}
-                <div className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600">
+                <div 
+                  className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-600 cursor-pointer hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                  onClick={() => navigate("/agent-profile")}
+                >
                   <div className="flex items-center gap-3">
                     <Avatar className="w-12 h-12">
                       <AvatarImage src="/lovable-uploads/bcc25c9e-d6ab-43c8-8ef2-a84077c6cc5f.png" />
