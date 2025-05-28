@@ -8,6 +8,7 @@ import Index from "./pages/Index";
 import Transactions from "./pages/Transactions";
 import Settings from "./pages/Settings";
 import AgentProfile from "./pages/AgentProfile";
+import PersonalInformation from "./pages/PersonalInformation";
 import SignIn from "./pages/SignIn";
 import LogIn from "./pages/LogIn";
 import NotFound from "./pages/NotFound";
@@ -27,6 +28,7 @@ const App = () => (
           <Route path="/transactions" element={<Transactions />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/agent-profile" element={<AgentProfile />} />
+          <Route path="/personal-information" element={<PersonalInformation />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
         </Routes>

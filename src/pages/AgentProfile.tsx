@@ -25,15 +25,6 @@ const AgentProfile = () => {
             <div className="w-10" /> {/* Spacer for center alignment */}
           </div>
 
-          {/* Logo */}
-          <div className="flex justify-center mb-8">
-            <img 
-              src="/lovable-uploads/9ebaef5e-903a-4293-9279-88291c159f57.png" 
-              alt="EclatPay" 
-              className="h-12"
-            />
-          </div>
-
           <ScrollArea className="h-[calc(100vh-12rem)] pr-4">
             <div className="space-y-8 pb-6">
               {/* Profile Section */}
@@ -62,7 +53,10 @@ const AgentProfile = () => {
                 <h3 className="text-2xl font-bold text-eclat-navy dark:text-white">Account</h3>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div 
+                    className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors"
+                    onClick={() => navigate("/personal-information")}
+                  >
                     <span className="text-eclat-navy dark:text-white font-medium text-lg">Personal Information</span>
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
