@@ -61,12 +61,15 @@ const AgentProfile = () => {
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
 
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div 
+                    className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors"
+                    onClick={() => navigate("/bank-accounts")}
+                  >
                     <span className="text-eclat-navy dark:text-white font-medium text-lg">Bank Details</span>
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
 
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors">
                     <span className="text-eclat-navy dark:text-white font-medium text-lg">Change Password</span>
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
@@ -78,12 +81,12 @@ const AgentProfile = () => {
                 <h3 className="text-2xl font-bold text-eclat-navy dark:text-white">Support</h3>
                 
                 <div className="space-y-4">
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors">
                     <span className="text-eclat-navy dark:text-white font-medium text-lg">Help Center</span>
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
 
-                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700">
+                  <div className="flex items-center justify-between py-4 border-b border-gray-200 dark:border-gray-700 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-800 px-4 rounded-lg transition-colors">
                     <span className="text-eclat-navy dark:text-white font-medium text-lg">Contact Us</span>
                     <ChevronRight className="w-6 h-6 text-gray-400 dark:text-eclat-blue" />
                   </div>
